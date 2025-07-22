@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"sk.pablo.ollama.ai"}];updateSearchResults();
