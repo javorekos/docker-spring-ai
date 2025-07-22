@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>sk.pablo</groupId>
-	<artifactId>model-docker-runner</artifactId>
+	<artifactId>Ollama-UI</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>model-docker-runner</name>
 	<description>Spring AI Chat Bot with Streaming Support</description>

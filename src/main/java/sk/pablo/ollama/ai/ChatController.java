@@ -1,4 +1,4 @@
-package sk.pablo.docker.ai;
+package sk.pablo.ollama.ai;
 
 
 import org.springframework.web.bind.annotation.RestController;

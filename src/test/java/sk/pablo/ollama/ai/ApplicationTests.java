@@ -1,4 +1,4 @@
-package sk.pablo.docker.ai;
+package sk.pablo.ollama.ai;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

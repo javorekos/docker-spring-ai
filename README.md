@@ -1,10 +1,11 @@
 # Docker Model Runner with Spring AI
 
-![Docker + Spring AI](https://img.shields.io/badge/Docker-Spring%20AI-blue)
+![Ollama + Spring AI]
 
-## Unleash Local AI Models with Docker and Spring Boot
 
-Looking to harness AI models locally without relying on cloud providers? This project demonstrates how to connect a Spring Boot application to [Docker's Model Runner feature](https://docs.docker.com/desktop/features/model-runner/), allowing you to interact with AI models that run directly on your machine.
+## Unleash Local AI Models with Ollama and Spring Boot
+
+Looking to harness AI models locally without relying on cloud providers? This project demonstrates how to connect a Spring Boot application to Ollama allowing you to interact with AI models that run directly on your machine.
 
 No API keys needed for OpenAI or other providers - your data stays local, and you control the entire AI interaction pipeline!
 
@@ -12,7 +13,7 @@ No API keys needed for OpenAI or other providers - your data stays local, and yo
 
 This application showcases the integration between:
 
-- Docker Desktop's Model Runner (Beta feature, requires Docker Desktop 4.40 or later)
+- Ollama Desktop 
 - Spring Boot 3.4.4
 - Spring AI framework
 - Java 24
@@ -21,7 +22,7 @@ The app sends prompts to locally running AI models through Docker's OpenAI-compa
 
 ## Project Requirements
 
-- Docker Desktop 4.40 or later (latest version required) with Apple Silicon (M1/M2/M3)
+- Ollama Desktop o.96 or later
 - Java 24 JDK
 - Maven build tool
 - Available RAM for model loading (requirements vary by model)
@@ -59,28 +60,23 @@ Spring AI BOM manages version compatibility:
 
 ## Getting Started
 
-### 1. Enable Docker Model Runner
+### 1. Enable Ollama
 
-First, make sure the Docker Model Runner feature is enabled:
 
-1. Open Docker Desktop
-2. Navigate to Settings → Features in development (Beta tab)
-3. Make sure "Enable Docker Model Runner" is checked
-4. **Important:** Also check "Enable host-side TCP support" (leave the default port of 12434)
-5. Apply and restart Docker Desktop
+1. Open Ollama Desktop
 
 ### 2. Pull an AI Model
 
 Pull a model from Docker Hub to your local environment:
 
 ```bash
-docker model pull ai/gemma3
+For example ollama run gemma3n
 ```
 
 You can check available models with:
 
 ```bash
-docker model list
+ollama model list
 ```
 
 ### 3. Configure Your Application
@@ -89,8 +85,8 @@ The application is pre-configured to connect to the Docker Model Runner API. Key
 
 ```properties
 spring.ai.openai.api-key=_
-spring.ai.openai.chat.base-url=http://localhost:12434/engines/llama.cpp
-spring.ai.openai.chat.options.model=ai/gemma3
+spring.ai.openai.chat.base-url=http://localhost:11434
+spring.ai.openai.chat.options.model=gemma3
 ```
 
 - The API key is set to "_" since no actual key is needed for local models
@@ -99,7 +95,7 @@ spring.ai.openai.chat.options.model=ai/gemma3
 
 ## How to Run the Application
 
-1. Ensure Docker Desktop is running and you've pulled a model
+1. Ensure Ollama is running and you've pulled a model
 2. Build the application using Maven:
 
 ```bash
@@ -130,7 +126,7 @@ public class Application {
     CommandLineRunner commandLineRunner(ChatClient.Builder builder) {
         return args -> {
             var client = builder.build();
-            String response = client.prompt("When was Docker created?")
+            String response = client.prompt("When was Ollama created?")
                     .call()
                     .content();
 
@@ -148,18 +144,16 @@ The code above:
 
 ## Troubleshooting
 
-### Command Not Found
-
-If `docker model` commands aren't recognized, create a symlink:
+### List of models
 
 ```bash
-ln -s /Applications/Docker.app/Contents/Resources/cli-plugins/docker-model ~/.docker/cli-plugins/docker-model
+ollama list
 ```
 
 ### Memory Issues
 
 Models require significant RAM. If your system becomes slow:
-1. Try smaller models like `ai/gemma3`
+1. Try smaller models like `gemma3n`
 2. Close other memory-intensive applications
 3. Set memory limits in Docker Desktop settings
 
